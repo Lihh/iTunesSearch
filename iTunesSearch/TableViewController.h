@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface TableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchButton;
+@property (weak, nonatomic) IBOutlet UITextField *searchField;
 
+- (IBAction)search:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
 
