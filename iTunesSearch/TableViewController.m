@@ -56,6 +56,8 @@
     
     [celula.nome setText:filme.nome];
     [celula.tipo setText:@"Filme"];
+    [celula.duracao setText:filme.duracao];
+    [celula.genero setText:filme.genero];
     
     return celula;
 }
