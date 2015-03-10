@@ -20,14 +20,8 @@
                         <color key="textColor" red="0.89928382640000004" green="0.12798005339999999" blue="0.001599563868" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duracao da midia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olY-O8-bm7">
-                        <rect key="frame" x="31" y="49" width="90" height="14"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" red="0.47058826679999999" green="0.49803924560000001" blue="0.8980392814" alpha="1" colorSpace="deviceRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genero da midia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N61-pC-Td8">
-                        <rect key="frame" x="31" y="64" width="83" height="14"/>
+                        <rect key="frame" x="31" y="55" width="83" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.47058826679999999" green="0.49803924560000001" blue="0.8980392814" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
@@ -38,24 +32,30 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="pais da midia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fQ-JJ-Pgt">
+                        <rect key="frame" x="31" y="68" width="103" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.47058826679999999" green="0.49803924560000001" blue="0.8980392814" alpha="1" colorSpace="deviceRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="6Z5-yj-wnl" secondAttribute="trailing" id="20H-3b-RZ8"/>
+                    <constraint firstItem="N61-pC-Td8" firstAttribute="top" secondItem="6Z5-yj-wnl" secondAttribute="bottom" constant="8" id="3dj-VL-GGj"/>
                     <constraint firstItem="6Z5-yj-wnl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="96O-aR-ps1"/>
-                    <constraint firstItem="N61-pC-Td8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="23" id="LEn-gA-g8d"/>
+                    <constraint firstItem="6fQ-JJ-Pgt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="23" id="Lms-lp-b8a"/>
                     <constraint firstItem="UIA-JU-luV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Q1V-YW-Wh5"/>
-                    <constraint firstItem="olY-O8-bm7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="23" id="XNo-OC-Ywe"/>
                     <constraint firstItem="UIA-JU-luV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="YdC-rX-aV6"/>
+                    <constraint firstItem="N61-pC-Td8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="23" id="Zm8-nC-qvw"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UIA-JU-luV" secondAttribute="trailing" id="cTH-Nq-14q"/>
-                    <constraint firstItem="N61-pC-Td8" firstAttribute="top" secondItem="olY-O8-bm7" secondAttribute="bottom" constant="1" id="jjI-N1-W16"/>
-                    <constraint firstItem="olY-O8-bm7" firstAttribute="top" secondItem="6Z5-yj-wnl" secondAttribute="bottom" constant="2" id="snY-sG-sMr"/>
+                    <constraint firstItem="6fQ-JJ-Pgt" firstAttribute="top" secondItem="N61-pC-Td8" secondAttribute="bottom" constant="-1" id="ku5-dc-PsG"/>
                     <constraint firstItem="6Z5-yj-wnl" firstAttribute="top" secondItem="UIA-JU-luV" secondAttribute="bottom" constant="5" id="tJH-0d-wda"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="duracao" destination="olY-O8-bm7" id="7Og-vI-yam"/>
                 <outlet property="genero" destination="N61-pC-Td8" id="ON9-Gr-N9d"/>
                 <outlet property="nome" destination="UIA-JU-luV" id="ubX-WX-gam"/>
+                <outlet property="pais" destination="6fQ-JJ-Pgt" id="H4y-aP-kDs"/>
                 <outlet property="tipo" destination="6Z5-yj-wnl" id="vYj-HE-tLd"/>
             </connections>
             <point key="canvasLocation" x="571" y="105"/>
