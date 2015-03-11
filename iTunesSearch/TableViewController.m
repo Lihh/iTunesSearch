@@ -60,6 +60,14 @@
     [celula.pais setText:filme.pais];
     [celula.genero setText:filme.genero];
     
+    NSTimeInterval timeInterval = [filme.duracao intValue]/1000;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *date1 = [[NSDate alloc] init];
+    NSDate *date2 = [[NSDate alloc] initWithTimeInterval:timeInterval sinceDate:date1];
+    NSCalendarUnit calendarUnit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *conversion = [calendar components:calendarUnit fromDate:date1 toDate:date2 options:0];
+    [celula.duracao setText:[NSString stringWithFormat:@"%ld:%ld:%ld", (long)conversion.hour, (long)conversion.minute, (long)conversion.second]];
+    
     return celula;
 }
 
@@ -77,6 +85,10 @@
     
     [searchField resignFirstResponder];
     [self.tableview reloadData];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [searchField resignFirstResponder];
 }
 
 
