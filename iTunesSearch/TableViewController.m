@@ -30,6 +30,7 @@
     
     self.tableview.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, 0.0f, 0.0);
     
+    [searchButton setTitle:NSLocalizedString(@"Search", nil)];
     
 #warning Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
    // self.tableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 15.f)];
@@ -56,7 +57,7 @@
     Filme *filme = [midias objectAtIndex:indexPath.row];
     
     [celula.nome setText:filme.nome];
-    [celula.tipo setText:@"Filme"];
+    [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Movie", nil)]];
     [celula.pais setText:filme.pais];
     [celula.genero setText:filme.genero];
     
@@ -82,6 +83,7 @@
     
     iTunesManager *itunes = [iTunesManager sharedInstance];
     midias = [itunes buscarMidias:(searchField.text)];
+    
     
     [searchField resignFirstResponder];
     [self.tableview reloadData];

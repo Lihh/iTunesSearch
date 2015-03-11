@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 joaquim. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "iTunesManager.h"
 #import "Entidades/Filme.h"
 
@@ -33,34 +34,47 @@ static bool isFirstAccess = YES;
     if (!termo) {
         termo = @"";
     }
-    
+
     NSString *url = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=movie", termo];
     NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     
     NSError *error;
-    NSDictionary *resultado = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                              options:NSJSONReadingMutableContainers
-                                                                error:&error];
-    if (error) {
-        NSLog(@"Não foi possível fazer a busca. ERRO: %@", error);
-        return nil;
+    
+    @try {
+        NSDictionary *resultado = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                  options:NSJSONReadingMutableContainers
+                                                                    error:&error];
+        if (error) {
+            NSLog(@"Não foi possível fazer a busca. ERRO: %@", error);
+            return nil;
+        }
+        
+        NSArray *resultados = [resultado objectForKey:@"results"];
+        NSMutableArray *filmes = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *item in resultados) {
+            Filme *filme = [[Filme alloc] init];
+            [filme setNome:[item objectForKey:@"trackName"]];
+            [filme setTrackId:[item objectForKey:@"trackId"]];
+            [filme setArtista:[item objectForKey:@"artistName"]];
+            [filme setDuracao:[item objectForKey:@"trackTimeMillis"]];
+            [filme setGenero:[item objectForKey:@"primaryGenreName"]];
+            [filme setPais:[item objectForKey:@"country"]];
+            [filmes addObject:filme];
+        }
+        
+        return filmes;
+    }
+    @catch (NSException *exception) {
+        UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"ERRO!" message:@"Erro na consulta. Tente novamente" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [errorAlert show];
+        
+        NSMutableArray *filmes = [[NSMutableArray alloc] init];
+        return filmes;
+        
     }
     
-    NSArray *resultados = [resultado objectForKey:@"results"];
-    NSMutableArray *filmes = [[NSMutableArray alloc] init];
     
-    for (NSDictionary *item in resultados) {
-        Filme *filme = [[Filme alloc] init];
-        [filme setNome:[item objectForKey:@"trackName"]];
-        [filme setTrackId:[item objectForKey:@"trackId"]];
-        [filme setArtista:[item objectForKey:@"artistName"]];
-        [filme setDuracao:[item objectForKey:@"trackTimeMillis"]];
-        [filme setGenero:[item objectForKey:@"primaryGenreName"]];
-        [filme setPais:[item objectForKey:@"country"]];
-        [filmes addObject:filme];
-    }
-    
-    return filmes;
 }
 
 
