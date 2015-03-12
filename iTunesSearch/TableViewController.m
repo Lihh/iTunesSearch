@@ -13,6 +13,7 @@
 
 @interface TableViewController () {
     NSArray *midias;
+    //NSArray *tipoMid;
 }
 
 @end
@@ -45,6 +46,7 @@
 #pragma mark - Metodos do UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+    //return tipoMid.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
