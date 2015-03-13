@@ -23,7 +23,7 @@
                 <items>
                     <barButtonItem style="plain" id="UcF-Q1-GyE">
                         <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="yis-5d-CYu">
-                            <rect key="frame" x="16" y="7" width="233" height="30"/>
+                            <rect key="frame" x="16" y="7" width="206" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>

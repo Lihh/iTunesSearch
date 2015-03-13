@@ -10,10 +10,15 @@
 #import "TableViewCell.h"
 #import "iTunesManager.h"
 #import "Entidades/Filme.h"
+#import "Musica.h"
+#import "Ebook.h"
+#import "Podcast.h"
 
 @interface TableViewController () {
-    NSArray *midias;
-    //NSArray *tipoMid;
+    NSArray *filmes;
+    NSArray *musicas;
+    NSArray *ebooks;
+    NSArray *podcasts;
 }
 
 @end
@@ -45,31 +50,90 @@
 
 #pragma mark - Metodos do UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-    //return tipoMid.count;
+    return 4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [midias count];
+    if (section == 0 ){
+        return [filmes count];
+    } else if (section == 1){
+        return [musicas count];
+    } else if (section == 2){
+        return [ebooks count];
+    } else {
+        return [podcasts count];
+    }
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0){
+        return [NSString stringWithFormat:NSLocalizedString(@"Movies", nil)];
+    } else if (section == 1){
+        return [NSString stringWithFormat:NSLocalizedString(@"Musics", nil)];
+    } else if (section == 2){
+        return [NSString stringWithFormat:NSLocalizedString(@"Ebooks", nil)];
+    } else{
+        return [NSString stringWithFormat:NSLocalizedString(@"Podcasts", nil)];
+    }
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TableViewCell *celula = [self.tableview dequeueReusableCellWithIdentifier:@"celulaPadrao"];
     
-    Filme *filme = [midias objectAtIndex:indexPath.row];
+    if (indexPath.section == 0) {
+        Filme *filme = [filmes objectAtIndex:indexPath.row];
+        
+        [celula.nome setText:filme.nome];
+        [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Movie", nil)]];
+        [celula.pais setText:filme.pais];
+        [celula.genero setText:filme.genero];
+        
+        NSTimeInterval timeInterval = [filme.duracao intValue]/1000;
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDate *date1 = [[NSDate alloc] init];
+        NSDate *date2 = [[NSDate alloc] initWithTimeInterval:timeInterval sinceDate:date1];
+        NSCalendarUnit calendarUnit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+        NSDateComponents *conversion = [calendar components:calendarUnit fromDate:date1 toDate:date2 options:0];
+        [celula.duracao setText:[NSString stringWithFormat:@"%ld:%ld:%ld", (long)conversion.hour, (long)conversion.minute, (long)conversion.second]];
+        
+    } else if (indexPath.section == 1){
+        Musica *musica = [musicas objectAtIndex:indexPath.row];
+        
+        [celula.nome setText:musica.nome];
+        [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Song", nil)]];
+        [celula.pais setText:musica.pais];
+        [celula.genero setText:musica.genero];
+        
+        NSTimeInterval timeInterval = [musica.duracao intValue]/1000;
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDate *date1 = [[NSDate alloc] init];
+        NSDate *date2 = [[NSDate alloc] initWithTimeInterval:timeInterval sinceDate:date1];
+        NSCalendarUnit calendarUnit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+        NSDateComponents *conversion = [calendar components:calendarUnit fromDate:date1 toDate:date2 options:0];
+        [celula.duracao setText:[NSString stringWithFormat:@"%ld:%ld:%ld", (long)conversion.hour, (long)conversion.minute, (long)conversion.second]];
+        
+    } else if (indexPath.section == 2){
+        Ebook *ebook = [ebooks objectAtIndex:indexPath.row];
+        
+        [celula.nome setText:ebook.nome];
+        [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Ebook", nil)]];
+        [celula.pais setText:ebook.preco];
+        [celula.genero setText:ebook.artista];
+        [celula.duracao setText:@""];
+        
+    } else if (indexPath.section == 3){
+        Podcast *podcast = [podcasts objectAtIndex:indexPath.row];
+        
+        [celula.nome setText:podcast.nome];
+        [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Podcast", nil)]];
+        [celula.pais setText:podcast.pais];
+        [celula.genero setText:podcast.genero];
+        [celula.duracao setText:@""];
+        
+    }
     
-    [celula.nome setText:filme.nome];
-    [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(filme.tipoMidia, nil)]];
-    [celula.pais setText:filme.pais];
-    [celula.genero setText:filme.genero];
     
-    NSTimeInterval timeInterval = [filme.duracao intValue]/1000;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *date1 = [[NSDate alloc] init];
-    NSDate *date2 = [[NSDate alloc] initWithTimeInterval:timeInterval sinceDate:date1];
-    NSCalendarUnit calendarUnit = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-    NSDateComponents *conversion = [calendar components:calendarUnit fromDate:date1 toDate:date2 options:0];
-    [celula.duracao setText:[NSString stringWithFormat:@"%ld:%ld:%ld", (long)conversion.hour, (long)conversion.minute, (long)conversion.second]];
     
     return celula;
 }
@@ -84,7 +148,10 @@
     [self.tableview registerNib:nib forCellReuseIdentifier:@"celulaPadrao"];
     
     iTunesManager *itunes = [iTunesManager sharedInstance];
-    midias = [itunes buscarMidias:(searchField.text)];
+    filmes = [itunes buscarFilmes:(searchField.text)];
+    musicas = [itunes buscarMusicas:(searchField.text)];
+    ebooks = [itunes buscarEbooks:(searchField.text)];
+    podcasts = [itunes buscarPodcasts:(searchField.text)];
     
     
     [searchField resignFirstResponder];
