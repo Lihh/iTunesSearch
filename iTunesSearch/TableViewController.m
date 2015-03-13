@@ -19,6 +19,7 @@
     NSArray *musicas;
     NSArray *ebooks;
     NSArray *podcasts;
+    NSUserDefaults *userDefaults;
 }
 
 @end
@@ -37,6 +38,16 @@
     self.tableview.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, 0.0f, 0.0);
     
     [searchButton setTitle:NSLocalizedString(@"Search", nil)];
+    
+    iTunesManager *itunes = [iTunesManager sharedInstance];
+    userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *lastSearch = [userDefaults objectForKey:@"lastSearch"];
+    
+    filmes = [itunes buscarFilmes:lastSearch];
+    musicas = [itunes buscarMusicas:lastSearch];
+    ebooks = [itunes buscarEbooks:lastSearch];
+    podcasts = [itunes buscarPodcasts:lastSearch];
+    
     
 #warning Necessario para que a table view tenha um espaco em relacao ao topo, pois caso contrario o texto ficara atras da barra superior
    // self.tableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableview.bounds.size.width, 15.f)];
@@ -152,6 +163,8 @@
     musicas = [itunes buscarMusicas:(searchField.text)];
     ebooks = [itunes buscarEbooks:(searchField.text)];
     podcasts = [itunes buscarPodcasts:(searchField.text)];
+    
+    [userDefaults setObject:searchField.text forKey:@"lastSearch"];
     
     
     [searchField resignFirstResponder];
