@@ -48,7 +48,7 @@ static bool isFirstAccess = YES;
                                                                   options:NSJSONReadingMutableContainers
                                                                     error:&error];
         if (error) {
-            NSLog(@"Não foi possível fazer a busca. ERRO: %@", error);
+            NSLog(@"Não foi possível fazer a busca de Filmes. ERRO: %@", error);
             return nil;
         }
         
@@ -64,6 +64,7 @@ static bool isFirstAccess = YES;
             [filme setGenero:[item objectForKey:@"primaryGenreName"]];
             [filme setPais:[item objectForKey:@"country"]];
             [filme setTipoMidia:[item objectForKey:@"kind"]];
+            [filme setImagemMidia:[item objectForKey:@"artworkUrl100"]];
             
             [filmes addObject:filme];
         }
@@ -97,7 +98,7 @@ static bool isFirstAccess = YES;
                                                                   options:NSJSONReadingMutableContainers
                                                                     error:&error];
         if (error) {
-            NSLog(@"Não foi possível fazer a busca. ERRO: %@", error);
+            NSLog(@"Não foi possível fazer a busca de Musicas. ERRO: %@", error);
             return nil;
         }
         
@@ -113,6 +114,7 @@ static bool isFirstAccess = YES;
             [musica setGenero:[item objectForKey:@"primaryGenreName"]];
             [musica setPais:[item objectForKey:@"country"]];
             [musica setTipoMidia:[item objectForKey:@"kind"]];
+            [musica setImagemMidia:[item objectForKey:@"artworkUrl100"]];
             
             [musicas addObject:musica];
         }
@@ -147,7 +149,7 @@ static bool isFirstAccess = YES;
                                                                   options:NSJSONReadingMutableContainers
                                                                     error:&error];
         if (error) {
-            NSLog(@"Não foi possível fazer a busca. ERRO: %@", error);
+            NSLog(@"Não foi possível fazer a busca de Ebooks. ERRO: %@", error);
             return nil;
         }
         
@@ -164,6 +166,7 @@ static bool isFirstAccess = YES;
             [ebook setPais:[item objectForKey:@"country"]];
             [ebook setTipoMidia:[item objectForKey:@"kind"]];
             [ebook setPreco:[item objectForKey:@"formattedPrice"]];
+            [ebook setImagemMidia:[item objectForKey:@"artworkUrl100"]];
             
             [ebooks addObject:ebook];
         }
@@ -198,7 +201,7 @@ static bool isFirstAccess = YES;
                                                                   options:NSJSONReadingMutableContainers
                                                                     error:&error];
         if (error) {
-            NSLog(@"Não foi possível fazer a busca. ERRO: %@", error);
+            NSLog(@"Não foi possível fazer a busca de Podcasts. ERRO: %@", error);
             return nil;
         }
         
@@ -214,6 +217,7 @@ static bool isFirstAccess = YES;
             [podcast setGenero:[item objectForKey:@"primaryGenreName"]];
             [podcast setPais:[item objectForKey:@"country"]];
             [podcast setTipoMidia:[item objectForKey:@"kind"]];
+            [podcast setImagemMidia:[item objectForKey:@"artworkUrl100"]];
             
             [podcasts addObject:podcast];
         }

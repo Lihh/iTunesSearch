@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *pais;
 @property (weak, nonatomic) IBOutlet UILabel *duracao;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imagem;
 
 @end

@@ -95,6 +95,7 @@
     if (indexPath.section == 0) {
         Filme *filme = [filmes objectAtIndex:indexPath.row];
         
+        [celula.imagem setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:filme.imagemMidia]]]];
         [celula.nome setText:filme.nome];
         [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Movie", nil)]];
         [celula.pais setText:filme.pais];
@@ -111,6 +112,7 @@
     } else if (indexPath.section == 1){
         Musica *musica = [musicas objectAtIndex:indexPath.row];
         
+        [celula.imagem setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:musica.imagemMidia]]]];
         [celula.nome setText:musica.nome];
         [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Song", nil)]];
         [celula.pais setText:musica.pais];
@@ -127,6 +129,7 @@
     } else if (indexPath.section == 2){
         Ebook *ebook = [ebooks objectAtIndex:indexPath.row];
         
+        [celula.imagem setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ebook.imagemMidia]]]];
         [celula.nome setText:ebook.nome];
         [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Ebook", nil)]];
         [celula.pais setText:ebook.preco];
@@ -136,6 +139,7 @@
     } else if (indexPath.section == 3){
         Podcast *podcast = [podcasts objectAtIndex:indexPath.row];
         
+        [celula.imagem setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:podcast.imagemMidia]]]];
         [celula.nome setText:podcast.nome];
         [celula.tipo setText:[NSString stringWithFormat:NSLocalizedString(@"Podcast", nil)]];
         [celula.pais setText:podcast.pais];
