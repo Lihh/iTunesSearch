@@ -158,7 +158,28 @@
     UINib *nib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
     [self.tableview registerNib:nib forCellReuseIdentifier:@"celulaPadrao"];
     
+    NSString *text = searchField.text;
+    
     iTunesManager *itunes = [iTunesManager sharedInstance];
+    
+    NSError *error = NULL;
+    if (!searchField.text) {
+        searchField.text = @"";
+    }
+    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:@"^[A-Z0-9a-z_+-]{2,100}$" options:NSRegularExpressionCaseInsensitive error:&error];
+    if (error) {
+        NSLog(@"Não foi possível fazer a busca. ERRO: %@", error);
+        return;
+    }
+    
+    NSTextCheckingResult *res = [expression firstMatchInString:text options:0 range:NSMakeRange(0, [text length])];
+    
+    if (!res){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:@"Termo de buscar invalido" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     filmes = [itunes buscarFilmes:(searchField.text)];
     musicas = [itunes buscarMusicas:(searchField.text)];
     ebooks = [itunes buscarEbooks:(searchField.text)];

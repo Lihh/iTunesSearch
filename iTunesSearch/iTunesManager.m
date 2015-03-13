@@ -140,6 +140,7 @@ static bool isFirstAccess = YES;
     NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     
     NSError *error;
+
     
     @try {
         NSDictionary *resultado = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -190,6 +191,7 @@ static bool isFirstAccess = YES;
     NSData *jsonData = [NSData dataWithContentsOfURL: [NSURL URLWithString:url]];
     
     NSError *error;
+
     
     @try {
         NSDictionary *resultado = [NSJSONSerialization JSONObjectWithData:jsonData
