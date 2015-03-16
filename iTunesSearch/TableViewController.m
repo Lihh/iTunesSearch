@@ -89,6 +89,39 @@
     
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *icon = [[UIView alloc] initWithFrame:CGRectMake(15, -25, tableView.frame.size.width, 25)];
+    icon.backgroundColor = [UIColor lightGrayColor];
+    
+    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(7, 5, 20, 20)];
+    UILabel *headerName = [[UILabel alloc] initWithFrame:CGRectMake(35, 5, tableView.frame.size.width, 20)];
+    [headerName setFont:[UIFont boldSystemFontOfSize:14]];
+    headerName.textColor = [UIColor whiteColor];
+    
+    if (section == 0 ){
+        [headerName setText:[NSString stringWithFormat:NSLocalizedString(@"Movies", nil)]];
+        [img setImage:[UIImage imageNamed:@"movie"]];
+    } else if (section == 1){
+        [headerName setText:[NSString stringWithFormat:NSLocalizedString(@"Musics", nil)]];
+        [img setImage:[UIImage imageNamed:@"music"]];
+    } else if (section == 2){
+        [headerName setText:[NSString stringWithFormat:NSLocalizedString(@"Ebooks", nil)]];
+        [img setImage:[UIImage imageNamed:@"ebook"]];
+    } else {
+        [headerName setText:[NSString stringWithFormat:NSLocalizedString(@"Podcasts", nil)]];
+        [img setImage:[UIImage imageNamed:@"podcast"]];
+    }
+    
+    [icon addSubview:headerName];
+    [icon addSubview:img];
+    
+    return icon;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 30.0;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TableViewCell *celula = [self.tableview dequeueReusableCellWithIdentifier:@"celulaPadrao"];
     
